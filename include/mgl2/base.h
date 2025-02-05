@@ -294,10 +294,10 @@ struct MGL_EXPORT mglTexture
 		memcpy(Sch,aa.Sch,260);	return aa;	}
 };
 //-----------------------------------------------------------------------------
-const mglColor NC(-1,-1,-1);
-const mglColor BC( 0, 0, 0);
-const mglColor WC( 1, 1, 1);
-const mglColor RC( 1, 0, 0);
+constexpr mglColor NC(-1,-1,-1);
+constexpr mglColor BC( 0, 0, 0);
+constexpr mglColor WC( 1, 1, 1);
+constexpr mglColor RC( 1, 0, 0);
 //-----------------------------------------------------------------------------
 /// Structure active points
 struct MGL_EXPORT mglActivePos

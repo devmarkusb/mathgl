@@ -106,9 +106,9 @@ struct MGL_EXPORT mglColor
 	float a;	///< Alpha component of color
 
 	/// Constructor for RGB components manualy
-	mglColor(float R,float G,float B, float A=1):r(R),g(G),b(B),a(A)	{}
+	constexpr mglColor(float R,float G,float B, float A=1):r(R),g(G),b(B),a(A)	{}
 	/// Constructor set default color
-	mglColor():r(0),g(0),b(0),a(1)	{}
+	constexpr mglColor():r(0),g(0),b(0),a(1)	{}
 	/// Constructor set color from character id
 	mglColor(char c, float bright=1)		{	Set(c,bright);	}
 	/// Copy constructor
