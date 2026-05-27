@@ -1,6 +1,6 @@
 if (MSVC)
     add_definitions(-wd4100 -wd4101 -wd4201 -wd4251 -wd4456 -wd4457 -wd4458 -wd4701 -wd4703 -wd4706 -wd4005 -wd4075)
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "^(Apple)?Clang$")
     add_compile_options(-Wno-everything -Wno-deprecated-declarations -Wno-return-type-c-linkage -Wno-deprecated-register
             -Wno-unused-parameter -Wno-format -Wno-nonnull -Wno-unused-variable)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
