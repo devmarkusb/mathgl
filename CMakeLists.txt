@@ -4,6 +4,10 @@ project( MathGL )
 
 include(warnings_suppressions_hotfix.cmake)
 
+if(NOT DEFINED MGL_INSTALL)
+    set(MGL_INSTALL ON)
+endif()
+
 set(MGL_DEP_LIBS)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -54,12 +58,14 @@ function(mgl_add_lib mgl_tmp_lib)
                set_target_properties(${mgllib}-static PROPERTIES OUTPUT_NAME "${mgllib}${mgl_lib_static}${mgl_lib_end}")
        endif(enable-mgl2)
 
-       install(
-               TARGETS ${mgllib} ${mgllib}-static
-               RUNTIME DESTINATION bin
-               ARCHIVE DESTINATION ${MGL_LIB_INSTALL_DIR}
-               LIBRARY DESTINATION ${MGL_LIB_INSTALL_DIR}
-       )
+       if(MGL_INSTALL)
+               install(
+                       TARGETS ${mgllib} ${mgllib}-static
+                       RUNTIME DESTINATION bin
+                       ARCHIVE DESTINATION ${MGL_LIB_INSTALL_DIR}
+                       LIBRARY DESTINATION ${MGL_LIB_INSTALL_DIR}
+               )
+       endif()
 endfunction(mgl_add_lib mgl_tmp_lib)
 
 MACRO(MGL_DEPENDENT_OPTION option doc default depends1 force1 depends2 force2)
@@ -654,8 +660,10 @@ if(enable-mgltex)
 	add_subdirectory( mgltex )
 endif(enable-mgltex)
 
+if(MGL_INSTALL)
 if(WIN32)
-	install(FILES ${CMAKE_SOURCE_DIR}/FindMathGL2.cmake DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME mathgl2-config.cmake)
+	install(FILES ${CMAKE_CURRENT_LIST_DIR}/FindMathGL2.cmake DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME mathgl2-config.cmake)
 else(WIN32)
-	install(FILES ${CMAKE_SOURCE_DIR}/FindMathGL2.cmake DESTINATION ${MGL_LIB_INSTALL_DIR}/cmake/mathgl2/ RENAME mathgl2-config.cmake)
+	install(FILES ${CMAKE_CURRENT_LIST_DIR}/FindMathGL2.cmake DESTINATION ${MGL_LIB_INSTALL_DIR}/cmake/mathgl2/ RENAME mathgl2-config.cmake)
 endif(WIN32)
+endif(MGL_INSTALL)
